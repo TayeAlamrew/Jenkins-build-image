@@ -4,31 +4,21 @@ pipeline {
 	stages{
 		stage ("build"){
 			steps{
-				echo "build"
+				sh "docker build -t tayealamrew/test-image:0.1 ."
 			}
 		}
-		stage ("test"){
+		stage ("Push"){
 			steps{
-				echo "test"
+				sh "docker push tayealamrew/test-image:0.1"
 			}
-		}
-		stage ("integration test"){
-			steps{
-				echo "integration test"
-			}
-		}
+	    }
 	}
 
 	post{
-		always{
-			echo "always"
-		}
-		failure{
-			echo "failure"
-		}
+
 		success{
-			echo "success"
+			echo "Creating and pushing image is successfully done"
 		}
-	}
+    }
 
 }
